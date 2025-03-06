@@ -6,7 +6,9 @@ const db = require("./db")
 // server
 const app = express()
 const port = 3333
-
+// static files
+app.use(express.static("public"))
+app.use("/css", express.static(__dirname + "public/css"))
 
 
 // set templating engine and paths
@@ -22,5 +24,9 @@ app.get( "/", (req,res)=> {
 app.get( "/new", (req,res)=> {
     res.render("pages/new")
 })
-app.listen(port);
-console.log(`Server is listening on PORT:${port}`)
+app.get("/messages", (req,res)=> {
+    res.render("pages/messages")       
+})
+
+// 
+app.listen(port, ()=> console.log(`Server is listening on PORT:${port}`));
